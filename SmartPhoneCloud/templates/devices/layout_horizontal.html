@@ -1,0 +1,74 @@
+{% extends 'ui_control/layout_horizontal.html' %}
+{% block layout_horizontal_show_button %}
+<button type="button" class="btn btn-secondary btn-sm" show-id="devices_list">
+    <i class="bi bi-box-arrow-right"></i>
+    显示手机清单
+</button>
+<button type="button" class="btn btn-secondary btn-sm" show-id="device_control">
+    <i class="bi bi-box-arrow-right"></i>
+    显示操作界面
+</button>
+{% endblock %}
+{% block layout_horizontal_left_cards %}
+<div class="layout-horizontal-left-card" id='devices_list'>
+    <div class="card bg-light">
+        <div class="card-header">
+            手机清单
+            <i class="bi bi-box-arrow-in-left" herf="#" tooltip='true' title='隐藏'></i>
+        </div>
+        <div class="card-body overflow-auto p-0">
+            <table id="devices_table"></table>
+        </div>
+    </div>
+</div>
+<div class="layout-horizontal-left-card" id='device_control' style="width: fit-content;">
+    <div class="card bg-light">
+        <div class="card-header">
+            操作界面&nbsp;-&nbsp;<a id='control_device_nick_name'></a>
+            <a id='control_device_name' style="display: none;"></a>
+            <i id='control_hide_button' class="bi bi-box-arrow-in-left" herf="#" tooltip='true' title='隐藏'></i>
+        </div>
+        <div class="card-body pl-2 pr-2">
+            <div style="display: flex; height: auto;">
+                <!-- 操作按钮 -->
+                <div class="btn-group-vertical mr-1" style="align-self: center;">
+                    <button type="button" class="btn btn-secondary btn-sm" tooltip='true' title='向上滑动'
+                        onclick="$.devices.send_adb_job('swipe', {'direct': 'up', 'duration': 100, 'smooth_step': 20});">
+                        <i class="bi bi-arrow-bar-up"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" tooltip='true' title='向左滑动'
+                        onclick="$.devices.send_adb_job('swipe', {'direct': 'left', 'duration': 100, 'smooth_step': 20});">
+                        <i class="bi bi-arrow-bar-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" tooltip='true' title='向右滑动'
+                        onclick="$.devices.send_adb_job('swipe', {'direct': 'right', 'duration': 100, 'smooth_step': 20});">
+                        <i class="bi bi-arrow-bar-right"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" tooltip='true' title='向下滑动'
+                        onclick="$.devices.send_adb_job('swipe', {'direct': 'down', 'duration': 100, 'smooth_step': 20});">
+                        <i class="bi bi-arrow-bar-down"></i>
+                    </button>
+                </div>
+                <!-- 控制手机界面 -->
+                <div style="display: block;">
+                    {% import 'devices/android_phone.html' as android_phone %}
+                    {{ android_phone.input(id='control_canvas_id') }}
+                </div>
+            </div>
+            <!-- 显示鼠标坐标 -->
+            <p style="display:block;">鼠标位置: &nbsp; x-<a id='control_pos_x'></a> &nbsp;  &nbsp; y-<a id='control_pos_y'></a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block layout_horizontal_center_card %}
+<div class="layout-horizontal-center-card">
+    <div class="card bg-light">
+        <div class="card-header">
+        已连接设备
+        </div>
+        <div id='list_screen_layout' class="card-body p-2">
+        </div>
+    </div>
+    </div>
+{% endblock %}

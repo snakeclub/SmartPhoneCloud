@@ -1,0 +1,64 @@
+{% extends 'ui_control/float_toolbar.html' %}
+
+{% block macro_toolbar %}
+
+{% import 'ui_control/macro_float_toolbar.html' as float_toolbar %}
+{{ float_toolbar.input(id='topToolbar') }}
+
+{% endblock %}
+
+{% block button_group %}
+<!-- 添加实际的工具按钮 -->
+<div class="btn-group mr-2" role="group" aria-label="控制台">
+    <button type="button" class="btn btn-primary p-0" data-toggle="tooltip" data-trigger="hover" title="取消手机控制" onclick="float_toolbar_remove_control_device();">
+      <i class="bi-backspace-reverse p-0 m-0"></i>
+    </button>
+</div>
+<div class="btn-group mr-2" role="group" aria-label="电源控制">
+    <button type="button" class="btn btn-primary p-0" data-toggle="tooltip" data-trigger="hover" title="打开电源" onclick="$.devices.send_adb_job('powerOn');">
+      <i class="bi-phone-fill p-0 m-0"></i>
+    </button>
+    <button type="button" class="btn btn-primary p-0" data-toggle="tooltip" data-trigger="hover" title="关闭电源" onclick="$.devices.send_adb_job('powerOff');">
+        <i class="bi-phone p-0 m-0"></i>
+    </button>
+    <button type="button" class="btn btn-primary p-0" data-toggle="tooltip" data-trigger="hover" title="设置连接USB屏幕常亮" onclick="$.devices.send_adb_job('screenStayOnUsb');">
+      <i class="bi-lightbulb p-0 m-0"></i>
+  </button>
+</div>
+<div class="btn-group mr-2" role="group" aria-label="minicap启停">
+  <button type="button" class="btn btn-primary p-0" data-toggle="tooltip" data-trigger="hover" title="启用屏幕同步"
+    onclick="$.devices.socketio.emit('switch_minicap_enable', {'enable': true});">
+    <i class="bi-eye p-0 m-0"></i>
+  </button>
+  <button type="button" class="btn btn-primary p-0" data-toggle="tooltip" data-trigger="hover" title="停止屏幕同步"
+    onclick="$.devices.socketio.emit('switch_minicap_enable', {'enable': false});">
+    <i class="bi-eye-slash p-0 m-0"></i>
+  </button>
+</div>
+{% if plugins_toolbar | length > 0 %}
+<div class="btn-group mr-2" role="group" aria-label="插件管理">
+  <button id="btn_plugin_dropdown" type="button" class="btn btn-info p-0 dropdown-toggle"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+    title="扩展插件入口">
+    <i class="bi-puzzle p-0 m-0 ml-1"></i>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="btn_plugin_dropdown">
+    <!-- 新开窗口的插件入口 -->
+    {% for name, url in plugins_toolbar %}
+      <a class="dropdown-item" target="_blank" href="{{ url }}">{{ name }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+<script type="text/javascript">
+  // 取消手机控制
+  function float_toolbar_remove_control_device(){
+    var control_device_name = $('#control_device_name').html();
+    if (control_device_name != ''){
+      $.devices.switch_device_show(control_device_name, false);
+    }
+  };
+</script>
+
+{% endblock %}
+

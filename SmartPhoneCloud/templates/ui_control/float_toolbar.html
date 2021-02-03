@@ -1,0 +1,58 @@
+<!--
+    浮动工具栏, 调用方式
+    1、新增一个模板继承当前模板
+    \{\% extends 'ui_control/float_toolbar.html' \%\}
+
+    \{\% block macro_toolbar \%\}
+    \{\% import 'ui_control/macro_float_toolbar.html' as float_toolbar \%\}
+    \{\{ float_toolbar.input(id='修改工具栏的实际id') \}\}
+    \{\% endblock \%\}
+
+    \{\% block button_group \%\}
+      这里添加实际的按钮组
+    \{\% endblock \%\}
+
+    2、在实际页面中通过引用的方式，加载模板
+    \{\% include 'devices/float_toolbar.html' \%\}
+-->
+{% block macro_toolbar %}
+{% import 'ui_control/macro_float_toolbar.html' as float_toolbar %}
+{{ float_toolbar.input(id='topToolbar') }}
+{% endblock %}
+    <!-- 拖动图标 -->
+    <i class="bi-arrows-move p-0 m-0 ml-1 mr-2" style="cursor: move;"></i>
+    <div class="btn-toolbar" role="toolbar" aria-label="button groups">
+    <!-- 后面添加按钮组和按钮 -->
+    {% block button_group %}
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+          <button type="button" class="btn btn-primary p-0" data-toggle="tooltip" data-trigger="hover" title="提示">
+            <i class="bi-arrows-move p-0 m-0"></i>
+          </button>
+        </div>
+    {% endblock %}
+  </div>
+  <!-- 样式表 -->
+  <style type="text/css">
+    .move-tool-bar{
+        background-color: white;
+        border:1px solid #409F89;
+        border-radius:5px;
+        flex-wrap: nowrap;
+        position:fixed; top:50px; left:400px;
+        display: flex;
+    }
+
+    .move-tool-bar button {
+        width: 30px; height: 30px;
+        align-self:center;
+    }
+
+    .move-tool-bar i {
+        font-size: 20px;
+        line-height:0px;
+        font-weight: bold;
+        align-self:center;
+    }
+    </style>
+</div>
+

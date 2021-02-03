@@ -1,0 +1,147 @@
+<!-- 水平布局 -->
+<div style="display: flex;">
+    <!-- 隐藏后的展示按钮 -->
+    <div class="layout-horizontal-show">
+        {% block layout_horizontal_show_button %}
+        <button type="button" class="btn btn-secondary btn-sm" show-id="card_id">
+            <i class="bi bi-box-arrow-right"></i>
+            显示XX
+        </button>
+        {% endblock %}
+    </div>
+    {% block layout_horizontal_left_cards %}
+    <div class="layout-horizontal-left-card" id='card_id'>
+        <div class="card bg-light">
+            <div class="card-header">
+                卡片标题
+                <i class="bi bi-box-arrow-in-left" herf="#" tooltip='true' title='隐藏'></i>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">文本主体</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block layout_horizontal_center_card %}
+    <div class="layout-horizontal-center-card">
+        <div class="card bg-light">
+          <div class="card-header">
+            已连接设备
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Light card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+      </div>
+    {% endblock %}
+</div>
+<!-- 样式表 -->
+<style type="text/css">
+    .layout-horizontal-show {
+      display: flex; flex-direction: column; max-width: 40px;
+    }
+
+    .layout-horizontal-show .btn {
+      writing-mode: vertical-lr!important;
+      -webkit-writing-mode: vertical-lr!important;
+      margin-right: .25rem!important;
+      margin-bottom: .25rem!important;
+      padding: .5rem!important;
+    }
+
+    .layout-horizontal-left-card, .layout-horizontal-center-card {
+      height: 93.5vh;
+    }
+
+    .layout-horizontal-left-card .card,.layout-horizontal-center-card .card {
+      height: 100%;
+    }
+
+    .layout-horizontal-left-card {
+      margin-right: 10px;
+      width: 300px; min-width: 300px;
+      padding: 0px;
+    }
+
+    .layout-horizontal-left-card .card-header {
+      padding: .65rem;
+    }
+
+    .layout-horizontal-left-card .card-header i {
+      font-size: 16px; margin: 0px; padding: 0px;
+      float:right; cursor: pointer;
+      text-decoration:none!important;
+      margin-left:.25rem!important;
+      margin-right:.25rem!important;
+    }
+
+    .layout-horizontal-left-card .card-header i:hover {
+      color:#007bff!important;
+    }
+
+    .layout-horizontal-center-card {
+      flex: 1;
+    }
+
+    .layout-horizontal-center-card .card-body {
+      overflow: auto; display: flex; flex-flow: row; flex-wrap: wrap; align-items:flex-start;
+    }
+</style>
+<!-- 对应的加载js代码 -->
+<script type="text/javascript">
+    // 页面加载完成后的操作
+    addLoadEvent(function(){
+        // 定义处理函数
+        $.ui_tools.layout_horizontal = new Object();
+
+        // 显示卡片
+        $.ui_tools.layout_horizontal.show_card = function(id) {
+            // 显示卡片
+            $('#'+id).show();
+
+            // 隐藏显示菜单
+            $('.layout-horizontal-show>button[show-id="'+id+'"]').hide();
+
+            // 添加到cookie里
+            Cookies.set('layout-horizontal-card-show-' + id, '1');
+        };
+
+        // 隐藏卡片
+        $.ui_tools.layout_horizontal.hide_card = function(id) {
+            // 隐藏卡片
+            $('#'+id).hide();
+
+            // 显示显示菜单
+            $('.layout-horizontal-show>button[show-id="'+id+'"]').show();
+
+            // 添加到cookie里
+            Cookies.set('layout-horizontal-card-show-' + id, '0');
+        };
+
+        // 遍历显示按钮进行处理
+        $('.layout-horizontal-show>button[show-id]').each(function(){
+            var id = $(this).attr('show-id');
+            // 处理显示和隐藏
+            var is_show = Cookies.get('layout-horizontal-card-show-' + id);
+            if (is_show !== undefined && is_show == '0'){
+                // 隐藏
+                $.ui_tools.layout_horizontal.hide_card(id);
+            }
+            else{
+                // 显示
+                $.ui_tools.layout_horizontal.show_card(id);
+            }
+
+            // 绑定操作按钮
+            $(this).click(function(){
+                $.ui_tools.layout_horizontal.show_card($(this).attr('show-id'));
+            });
+
+            $('#'+id+'>.card>.card-header>i').click(function(){
+                $.ui_tools.layout_horizontal.hide_card($(this).parent().parent().parent().attr('id'));
+            });
+        });
+    });
+</script>

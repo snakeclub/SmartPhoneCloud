@@ -1,0 +1,66 @@
+<!-- 在线用户的操作按钮 -->
+<div class="card border-primary customer-hv-bt">
+    <div class="card-body container overflow-auto pt-1">
+      <div class="form-row mb-2">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="send_mode_type"
+            id="send_mode_type_selected" value="selected" checked>
+          <label class="form-check-label" for="send_mode_type_selected">发送所有选中用户</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="send_mode_type"
+            id="send_mode_type_random" value="random">
+          <label class="form-check-label" for="send_mode_type_random">随机发送一个用户</label>
+        </div>
+        <div class="form-check ml-2">
+          <input class="form-check-input" type="checkbox" value="" id="send_mode_type_wait" checked>
+          <label class="form-check-label" for="send_mode_type_wait">
+            多人操作间隔随机时间
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <h6 class="card-title m-2 mt-3 font-weight-bold">发送数字</h6>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.send_chat('1', this);">1</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.send_chat('2', this);">2</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.send_chat('3', this);">3</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.send_chat('4', this);">4</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.send_chat('5', this);">5</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.send_chat('6', this);">6</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.send_chat('666', this);">666</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.send_chat('7', this);">7</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.send_chat('8', this);">8</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.send_chat('9', this);">9</button>
+      </div>
+      <div class="row">
+        <h6 class="card-title m-2 mt-3 font-weight-bold">执行操作</h6>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.app_give_thumbs_up(5.0);">点赞5秒</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.app_give_thumbs_up(10.0);">点赞10秒</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.app_give_thumbs_up($.douyin_api.bgconfig.give_thumbs_self_define);">自定义点赞</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.send_heart(this);">送心心</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.click_car(this);">点击购物车</button>
+        <button type="button" class="btn btn-primary m-2" id="" onclick="$.douyin_api.app_tap_screen(this);">点击屏幕</button>
+      </div>
+      <div class="row">
+        <h6 class="card-title m-2 mt-3 font-weight-bold">发送聊天</h6>
+        <input type="text" class="form-control col-sm-8 m-2" id="chat_text" placeholder="输入...">
+        <button type="button" class="btn btn-primary m-2" id="btn_send_chat" onclick="$.douyin_api.send_chat($('#chat_text').val(), this);$('#chat_text').val('');">发送聊天</button>
+      </div>
+    </div>
+  </div>
+<!-- 对应的加载js代码 -->
+<script type="text/javascript">
+    // 添加onload事件
+    addLoadEvent(function(){
+      // 聊天输入框绑定回车动作
+      $('#chat_text').keypress(function (event) {
+          var keynum = (event.keyCode ? event.keyCode : event.which);
+          if (keynum == '13') {
+            $.douyin_api.send_chat($('#chat_text').val(), $('#btn_send_chat'));
+            $('#chat_text').val('');
+              // 返回false屏蔽后续按键处理
+              return false;
+          }
+      });
+    });
+</script>

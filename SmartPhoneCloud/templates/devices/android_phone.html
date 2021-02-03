@@ -1,0 +1,140 @@
+<!-- 安卓手机模型 -->
+{% macro input(id='control_canvas_id') %}
+<div class="android-phone" show-id="{{ id }}">
+    <!-- 头部 -->
+    <div class="phone-head">
+        <div class="phone-head-bg phone-color">
+            <!-- 左边占位 -->
+            <div class="phone-holder phone-holder-side">
+                <i class="bi bi-circle-fill text-danger ml-4" style="align-self: center;"></i>
+            </div>
+            <!-- 中间占位 -->
+            <div class="phone-holder phone-holder-center">
+                <!-- 听筒 -->
+                <div class="phone-heard"></div>
+            </div>
+            <!-- 右边占位 -->
+            <div class="phone-holder phone-holder-side">
+            </div>
+        </div>
+    </div>
+    <!-- 手机屏幕 -->
+    <div class="phone-screen">
+        <!-- 左边框 -->
+        <div class="phone-screen-side-left phone-color"></div>
+        <!-- 中间屏幕 -->
+        <div class="phone-screen-center">
+            <canvas id="{{ id }}" class="phone-screen-canvas"></canvas>
+        </div>
+        <!-- 右边边框 -->
+        <div class="phone-screen-side-right phone-color"></div>
+    </div>
+    <!-- 尾部 -->
+    <div class="phone-bottom">
+        <div class="phone-bottom-bg phone-color">
+            <!-- 左边占位 -->
+            <div class="phone-holder phone-holder-side">
+                <i class="bi bi-caret-right" herf="#" tooltip='true' title='按下返回键' style="font-size: 30px;"
+                onclick="$.devices.send_adb_job('pressKey', {'keycode': 4});"></i>
+            </div>
+            <!-- 中间占位 -->
+            <div class="phone-holder phone-holder-center">
+                <i class="bi bi-house" herf="#" tooltip='true' title='按下Home键' onclick="$.devices.send_adb_job('pressKey', {'keycode': 3});"></i>
+            </div>
+            <!-- 右边占位 -->
+            <div class="phone-holder phone-holder-side">
+                <i class="bi bi-square" herf="#" tooltip='true' title='最近键' style="font-size: 20px;"
+                onclick="$.devices.send_adb_job('pressKey', {'keycode': 187});"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 样式表 -->
+<style type="text/css">
+    /* 手机实际展示位置宽度为该宽度-10(两个边框) */
+    .android-phone {
+        display: flex; flex-direction: column;
+        width:290px;
+        padding: 0px;
+    }
+
+    /* 手机颜色 */
+    .android-phone .phone-color {
+        background-color: black;
+    }
+
+    /* 上下边框左中右的占位框 */
+    .android-phone .phone-holder {
+        height:100%; margin: 0px; display: flex;
+    }
+
+    /* 两边的占位框宽度 */
+    .android-phone .phone-holder-side {
+        width: 35%;
+    }
+
+    /* 中间的占位框宽度 */
+    .android-phone .phone-holder-center {
+        width: 30%;
+    }
+
+    .android-phone .phone-head, .android-phone .phone-screen, .android-phone .phone-bottom {
+        padding: 0px; margin: 0px; width:100%; overflow: hidden;
+    }
+
+    /* 上边框 */
+    .android-phone .phone-head {
+        height:35px;
+    }
+
+    /* 上边框背景 */
+    .android-phone .phone-head-bg {
+        width:100%; height:100%; margin: 0px;
+        border-top-left-radius: 10px; border-top-right-radius: 10px;
+        display: flex; flex-direction: row;
+    }
+
+    .android-phone .phone-heard {
+        width: 80%; height:3px; background-color: #f0f8ff;
+        border-radius: 2px; align-self:center; margin-left: auto; margin-right: auto;
+    }
+
+    /* 屏幕位置高度 */
+    .android-phone .phone-screen {
+        height:400px; display: flex;
+    }
+
+    /* 屏幕左右边 */
+    .android-phone .phone-screen-side-left, .android-phone .phone-screen-side-right {
+        width: 5px; height: 100%; flex-shrink: 0;
+    }
+
+    /* 屏幕画布 */
+    .android-phone .phone-screen-center {
+        height: 100%; flex: 1; overflow: hidden;
+    }
+
+    .android-phone .phone-screen-canvas {
+        background-color:dimgrey; width: 100%; height: 100%;
+    }
+
+    /* 下边框高度 */
+    .android-phone .phone-bottom {
+        height:50px;
+    }
+
+    /* 下边框背景 */
+    .android-phone .phone-bottom-bg {
+        width:100%; height:100%; margin: 0px;
+        border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;
+        display: flex; flex-direction: row;
+    }
+
+    .phone-bottom-bg i {
+        font-size: 25px; color: #f0f8ff; align-self:center; margin-left: auto; margin-right: auto;
+        cursor: pointer;
+    }
+
+
+</style>
+{% endmacro %}

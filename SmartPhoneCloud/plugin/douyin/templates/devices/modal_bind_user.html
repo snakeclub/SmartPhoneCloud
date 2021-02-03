@@ -1,0 +1,33 @@
+<!-- 获取抖音用户的弹出框 -->
+<div class="d-none modal-dialog modal-dialog-centered" id="device_bind_user">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">修改设备别名</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container-fluid">
+        <!-- 连接信息 -->
+        <div class="form-row mb-2">
+          <label class="col-sm-2 col-form-label" for="bind_user_device_name">设备号</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control-plaintext" id="bind_user_device_name">
+          </div>
+          <button type="button" class="btn btn-primary col-sm-3" id="bind_user_get_app_user"
+            onclick="$.douyin_api.get_app_user(false);">自动查抖音号</button>
+        </div>
+        <div class="form-row mb-2">
+          <label class="col-sm-2 col-form-label mb-2" for="bind_user_user_name">别名</label>
+          <div class="col-sm-4 mb-2">
+            <input type="text" class="form-control" id="bind_user_user_name">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="btn_bind_user_submit"
+          onclick="$.douyin_api.update_nick_name(false);">修改</button>
+      </div>
+    </div>
+  </div>

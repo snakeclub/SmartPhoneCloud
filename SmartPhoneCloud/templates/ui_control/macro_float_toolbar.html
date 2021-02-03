@@ -1,0 +1,31 @@
+{% macro input(id='topToolbar') %}
+<script type="text/javascript">
+    // 添加onload事件
+    addLoadEvent(function(){
+        // 浮动工具栏
+        var topToolBar = $("#{{ id }}");
+        topToolBar.bind("mousedown",function(){$(this).Drag({
+            changeDragCursor: false,
+            endDragFun : function(confirmret,JQuery_UITool_DragControl,dragOnObjects){
+            // 拖动结束后将位置信息写入cookie
+            var obj = $("#{{ id }}");
+            var left = obj.css('left');
+            var top = obj.css('top');
+            Cookies.set('{{ id }}-pos-left', left);
+            Cookies.set('{{ id }}-pos-top', top);
+            },
+        });});
+
+        // 根据cookie设置位置
+        var left = Cookies.get('{{ id }}-pos-left');
+        var top = Cookies.get('{{ id }}-pos-top');
+        if (left !== undefined){
+            topToolBar.css('left', left);
+        }
+        if (top !== undefined){
+            topToolBar.css('top', top);
+        }
+    });
+</script>
+<div id="{{ id }}" class="move-tool-bar p-1">
+{% endmacro %}

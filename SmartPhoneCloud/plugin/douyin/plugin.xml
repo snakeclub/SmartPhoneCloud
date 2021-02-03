@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <info>
+        <!--
+            插件基本信息
+            show_name : 显示名
+            plugin_name : 插件安装名, 也是安装后的路径名
+            entrance_type : 入口类型, toolbar - 浮动工具栏入口, tab - tab页入口
+            url : 要映射路由的访问的url地址
+            render_type : 网页渲染类型, html - static目录下的页面, templates - 模型文件, function - 函数
+            render_para : 网页渲染参数, 对应render_type传入的值说明如下:
+                html - html文件访问路径, 如果为相对路径，则以根目录 "website/plugin/插件名/" 开始，也可以指定从website开始的决对路径, 例如"/index.html"
+                templates - 模型文件访问路径, 如果为相对路径，则以根目录 "templates/plugin/插件名/" 开始，也可以指定从templates开始的决对路径, 例如"/index.html"
+        -->
+        <show_name>抖音直播间控制</show_name>
+        <plugin_name>douyin</plugin_name>
+        <entrance_type>toolbar</entrance_type>
+        <url>/douyin</url>
+        <render_type>templates</render_type>
+        <render_para>douyin.html</render_para>
+    </info>
+    <import>
+        <!--
+            要导入的模块
+            module_name - 作为标签名，要导入多个模块就要多个标签
+                extend_path : 查找模块的要添加的搜索路径, 如果不传或传相对路径，则搜索路径从"插件目录/lib/"开始拼接
+                init_class : 要执行初始化处理的类，每个标签名为一个类
+                    init_type : 初始化类型，class - 直接使用类初始化, instance - 执行实例化
+                        要执行实例化的类, 初始化传入参数如下：
+                            config_services: 框架的配置服务对象
+                            device_services: 框架的设备服务对象
+                            config_path: str
+                            plugin_path: str
+                            logger: Logger
+                    add_route_by_class : 是否将类添加为restful api路由
+                    blacklist : 添加路由的黑名单, 格式为"函数1,函数2,..."
+        -->
+        <douyin_api>
+            <extend_path></extend_path>
+            <init_class>
+                <DyControlApi>
+                    <init_type>instance</init_type>
+                    <add_route_by_class type="bool">true</add_route_by_class>
+                    <blacklist></blacklist>
+                </DyControlApi>
+            </init_class>
+        </douyin_api>
+    </import>
+</config>

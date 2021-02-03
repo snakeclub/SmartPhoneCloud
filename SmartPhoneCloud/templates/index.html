@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/bootstrap-table.min.css">
+  <link rel="stylesheet" href="./css/bootstrap-table-fixed-columns.min.css">
+  <link rel="stylesheet" href="./css/bootstrap-icons.css">
+
+  <style type="text/css">
+    /* 指定全局字体大小(缩小后中文好看一点) */
+    html {
+      font-size: 14px;
+    }
+
+    /* 65% 屏幕高度 */
+    .customer-hv-top {
+      height: 65vh;
+      min-height: 500px;
+    }
+
+    .customer-hv-bt {
+      height: 25vh;
+      min-height: 200px;
+    }
+
+    .customer-hv-full {
+      height: 93.5vh;
+      min-height: 500px;
+    }
+
+    /* 最小宽度限制 */
+    .customer-mw-sm {
+      min-width: 250px;
+    }
+
+    /* 字体14px */
+    .customer-f-sm {
+      font-size: 14px;
+    }
+  </style>
+
+  <script type="text/javascript">
+    // 支持window.onload多次添加方法
+    function addLoadEvent(fun) {
+      var oldonload = window.onload;
+      if (typeof window.onload != 'function') {
+        window.onload = fun;
+      }else{
+        window.onload = function () {
+          oldonload();
+          fun();
+        }
+      }
+    };
+
+    // 添加onload事件
+    addLoadEvent(function (){
+      // 切换页签的前触发的动作
+      $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+        // e.target 新激活页签对象, e.relatedTarget 原页签对象
+        $.sysconfig.on_toggle_tab($(e.target), $(e.relatedTarget));
+      });
+
+      // 启用提示信息
+      $("[data-toggle='tooltip']").tooltip();
+      $("[tooltip='true']").tooltip(); // 支持通过别的属性设置
+
+      // 模态框的打开前操作，可以进行自动填值
+      $('#share_modal').on('show.bs.modal', function (e) {
+        // e.relatedTarget 触发动作的对象，e.target 目标模态窗口
+        // 不同模态框的个性处理逻辑
+        // switch ($(e.target).attr('content_id')) {
+        //   case 'device_bind_nick_name':
+        //     // 绑定用户
+        //     var device_name = $('#device_bind_nick_name').attr('row-id');
+        //     var row = $('#devices_table').bootstrapTable('getRowByUniqueId', device_name);
+        //     $('#bind_user_device_name').val(device_name);
+        //     $('#bind_nick_name_nickname').val(row.nick_name);
+        //     break;
+        // }
+      });
+
+      // 加载界面
+      $.sysconfig.init_ui();
+      $.devices.init_ui();
+      $.devices.start_devices_sync();
+    });
+  </script>
+
+  <title>群控管理后台</title>
+</head>
+
+<body class="body-with-top-nav d-flex">
+  <script>
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isIE = !(userAgent.indexOf("Opera") > -1 || userAgent.indexOf("Edge") > -1 || userAgent.indexOf("Firefox") > -
+      1 || userAgent.indexOf("Safari") > -1 || userAgent.indexOf("Chrome") > -1);
+  </script>
+
+  <!-- 对屏幕阅读器以外的设备隐藏内容 -->
+  <a id="skippy" class="sr-only sr-only-focusable" href="#content">
+    <div class="container"> <span class="skiplink-text">Skip to main content</span> </div>
+  </a>
+
+  <div class="container-fluid">
+    <nav>
+      <div class="nav nav-tabs nav-pills" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-device-tab" data-toggle="tab" href="#nav-device" role="tab"
+          aria-controls="nav-device" aria-selected="true">
+          <i class="bi-phone-vibrate m-0 p-0 mr-1"></i>设备管理
+          </a>
+        <a class="nav-item nav-link" id="nav-config-tab" data-toggle="tab" href="#nav-config" role="tab"
+          aria-controls="nav-config" aria-selected="false">
+          <i class="bi-gear m-0 p-0 mr-1"></i>系统配置</a>
+      </div>
+    </nav>
+    <div class="tab-content mt-2" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-device" role="tabpanel" aria-labelledby="nav-device-tab">
+          <!-- 设备管理主框架 -->
+          {% include 'devices/layout_horizontal.html' %}
+          <!-- 浮动工具栏 -->
+          {% include 'devices/float_toolbar.html' %}
+      </div>
+      <div class="tab-pane fade" id="nav-config" role="tabpanel" aria-labelledby="nav-config-tab">
+        <!-- 系统配置 -->
+        {% include 'sysconfig/sysconfig.html' %}
+      </div>
+    </div>
+  </div>
+
+  <!-- 固定的Modal模块 -->
+  <div class="modal" id="share_modal" role="dialog" tabindex="-1">
+    <!-- Loading遮罩 -->
+   {% include 'ui_control/modal_loading.html' %}
+
+   <!-- 绑定昵称的弹出框 -->
+   {% include 'devices/bind_nick_name.html' %}
+  </div>
+
+   <!-- 居中显示的提示框 -->
+   {% include 'ui_control/alert_toast.html' %}
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="./js/jquery-3.5.1.min.js"></script>
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/bootstrap-table.min.js"></script>
+  <script src="./js/bootstrap-table-zh-CN.min.js"></script>
+  <script src="./js/bootstrap-table-fixed-columns.min.js"></script>
+  <!-- 提升画布显示质量 -->
+  <script src="./js/hidpi-canvas.min.js"></script>
+  <script src="./js/js.cookie.min.js"></script>
+  <script src="./js/uuid.js"></script>
+  <script src="./js/socket.io.js"></script>
+  <script src="./js/ToolFunction.js"></script>
+  <script src="./js/DragControl.js"></script>
+  <script src="./js/ui_tools.js"></script>
+  <script src="./js/restful_api.js"></script>
+  <script src="./js/sysconfig.js"></script>
+  <script src="./js/devices.js"></script>
+</body>
+
+</html>

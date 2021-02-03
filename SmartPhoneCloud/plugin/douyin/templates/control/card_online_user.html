@@ -1,0 +1,44 @@
+<!-- 在线用户 -->
+<div class="card border-primary customer-hv-top">
+    <div class="card-header text-white bg-primary customer-f-sm">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="online_user_selected">
+        <label class="form-check-label" for="online_user_selected">在线用户&nbsp;(&nbsp;<a
+            id="online_user_count">0</a>&nbsp;)</label>
+      </div>
+    </div>
+    <div class="card-body p-0 overflow-auto">
+      <table id="online_user_table"></table>
+    </div>
+</div>
+<!-- 对应的加载js代码 -->
+<script type="text/javascript">
+    // 添加onload事件
+    addLoadEvent(function(){
+      // 在线用户清单绑定
+      $('#online_user_selected').change(function () {
+        var table = $("#online_user_table");
+        if ($(this).is(':checked')) {
+          // 选中全部，先将所有信息加入选中信息
+          $.douyin_api.set_selected_user_text(
+            table.bootstrapTable('getData')
+          );
+          table.bootstrapTable('checkAll');
+        } else {
+          // 取消选中
+          $.douyin_api.set_selected_user_text([]);
+          table.bootstrapTable('uncheckAll');
+        }
+      });
+
+      // 在线用户清单绑定选中和取消选中动作
+      $('#online_user_table').on('check.bs.table', function(e, row, element){
+        // 选中
+        $.douyin_api.select_user(row.device_name);
+      });
+      $('#online_user_table').on('uncheck.bs.table', function(e, row, element){
+        // 取消选中
+        $.douyin_api.unselect_user(row.device_name);
+      });
+    });
+</script>

@@ -1,0 +1,18 @@
+<!-- 后台参数设置 -->
+<div class="card border-primary customer-hv-full">
+    <div class="card-header text-white bg-primary customer-f-sm">
+      后台参数设置
+    </div>
+    <div class="card-body p-0 overflow-auto">
+      <form id='form_bg_config' class="m-2 ml-4">
+      </form>
+    </div>
+    <div class="card-footer text-muted d-flex justify-content-center">
+      <div id='form_bg_config_button'>
+        <button type="button" class="btn btn-secondary" id="form_bg_config_refresh"
+          onclick="$.douyin_api.get_bg_config(false);">刷 新</button>
+        <button type="button" class="btn btn-primary" id="form_bg_config_submit"
+          onclick="$.douyin_api.set_bg_config(false);">提 交</button>
+      </div>
+    </div>
+  </div>

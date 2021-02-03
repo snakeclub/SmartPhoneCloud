@@ -1,0 +1,31 @@
+<!-- 绑定别名的弹出框 -->
+<div class="d-none modal-dialog modal-dialog-centered" id="device_bind_nick_name">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">修改昵称</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container-fluid">
+        <!-- 设备信息 -->
+        <div class="form-row mb-2">
+          <label class="col-sm-2 col-form-label" for="bind_nick_name_device_name">设备号</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control-plaintext" id="bind_nick_name_device_name">
+          </div>
+        </div>
+        <div class="form-row mb-2">
+          <label class="col-sm-2 col-form-label mb-2" for="bind_nick_name_nickname">别名</label>
+          <div class="col-sm-4 mb-2">
+            <input type="text" class="form-control" id="bind_nick_name_nickname">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="btn_bind_nick_name_submit"
+          onclick="$.sysconfig.update_nick_name(false);">修改</button>
+      </div>
+    </div>
+</div>

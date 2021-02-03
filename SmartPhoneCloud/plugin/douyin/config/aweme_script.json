@@ -1,0 +1,106 @@
+{
+    "base": {
+        "android_line_script": [
+            {"tips": "查找首页搜索图标", "action": "find", "xpath": "//*[@content-desc=\"搜索\" and @class=\"android.widget.Button\"]"},
+            {"tips": "点击首页搜索图标", "action": "click"},
+            {"tips": "等待搜索页面打开", "action": "wait_activity", "activity": ".search.activity.SearchResultActivity", "timeout": 10},
+            {"tips": "查找搜索输入框", "action": "find", "id": "ai5"},
+            {"tips": "点击搜索输入框", "action": "click"},
+            {"tips": "输入搜索直播间名", "action": "send_keys", "keys": "{$=直播间=$}"},
+            {"tips": "切换输入法为Appium", "action": "set_ime", "ime": "com.sohu.inputmethod.sogou.leshi/.SogouIME"},
+            {"tips": "等待一会", "action": "wait", "time": 1.0},
+            {"tips": "点击输入法搜索按钮", "action": "tap", "pos": [980, 1804]},
+            {"tips": "等待一会", "action": "wait", "time": 1.0},
+            {"tips": "切换输入法为ADBKeyboard", "action": "set_ime", "ime": "com.android.adbkeyboard/.AdbIME"},
+            {"tips": "等待一会", "action": "wait", "time": 1.0},
+            {"tips": "查找搜索结果直播栏位按钮", "action": "find", "xpath": "//*[@text=\"直播\" and @class=\"android.widget.TextView\"]"},
+            {"tips": "点击搜索结果直播栏位按钮", "action": "click"},
+            {"tips": "查找直播图标", "action": "find", "xpath": "//*[@text=\"{$=直播间=$}\" and @class=\"android.widget.TextView\"]/preceding-sibling::*[@class=\"android.widget.FrameLayout\"]"},
+            {"tips": "点击直播图标", "action": "click"}
+        ],
+        "android_user_getName_script": [
+            {"tips": "查找首页\"我\"按钮", "action": "find", "xpath": "//*[@text=\"我\" and @class=\"android.widget.TextView\"]"},
+            {"tips": "点击首页\"我\"按钮", "action": "click"},
+            {"tips": "等待一会", "action": "wait", "time": 1.0},
+            {"tips": "查找用户名控件", "action": "find", "id": "enq", "pos": 0}
+        ],
+        "android_chat_rect_script": [
+            {"tips": "获取发言对象区域", "action": "find", "xpath": "//*[@text=\"说点什么...\" and @clickable=\"true\" and @class=\"android.widget.TextView\"]", "back": "rect"}
+        ],
+        "android_chat_send_script": [
+            {"tips": "获取发送按钮区域", "action": "find", "xpath": "//*[@content-desc=\"发送\" and @class=\"android.widget.Button\"]", "back": "rect"}
+        ],
+        "android_chat_send_locate": {
+            "tips": "通过图片匹配获取发送按钮区域", "action": "locate", "image": "chat_send.png", "confidence": 0.95
+        },
+        "android_heart_script": [
+            {"tips": "获取小心心按钮区域", "action": "find", "xpath": "//*[@content-desc=\"小心心\" and @clickable=\"true\" and @class=\"android.widget.Button\"]", "back": "rect"}
+        ],
+        "android_car_script": [
+            {"tips": "获取购物车按钮区域", "action": "find", "xpath": "//*[@content-desc=\"礼物\" and @clickable=\"true\" and @class=\"android.widget.Button\"]/preceding-sibling::*[@NAF=\"true\" and @class=\"android.widget.FrameLayout\"]", "back": "rect"}
+        ]
+    },
+    "match": [
+        {
+            "descript": "匹配抖音 14.* 版本的脚本",
+            "regular": {
+                "app_version": "^14\\..*"
+            },
+            "script": {
+                "android_line_script": [
+                    {"tips": "查找首页搜索图标", "action": "find", "xpath": "//android.widget.Button[@content-desc=\"搜索\"]"},
+                    {"tips": "点击首页搜索图标", "action": "click"},
+                    {"tips": "等待搜索页面打开", "action": "wait_activity", "activity": ".search.activity.SearchResultActivity", "timeout": 10},
+                    {"tips": "查找搜索输入框", "action": "find", "id": "aia"},
+                    {"tips": "点击搜索输入框", "action": "click"},
+                    {"tips": "输入搜索直播间名", "action": "send_keys", "keys": "{$=直播间=$}"},
+                    {"tips": "查找搜索按钮", "action": "find", "xpath": "//android.widget.Button[@content-desc=\"搜索\"]"},
+                    {"tips": "点击搜索按钮", "action": "click"},
+                    {"tips": "查找搜索结果直播栏位按钮", "action": "find", "xpath": "//android.widget.TextView[@text=\"直播\"]"},
+                    {"tips": "点击搜索结果直播栏位按钮", "action": "click"},
+                    {"tips": "查找直播图标", "action": "find", "xpath": "//android.widget.TextView[@text=\"{$=直播间=$}\"]/preceding-sibling::android.widget.FrameLayout"},
+                    {"tips": "点击直播图标", "action": "click"}
+                ],
+                "android_user_getName_script": [
+                    {"tips": "查找首页\"我\"按钮", "action": "find", "xpath": "//android.widget.TextView[@text=\"我\"]"},
+                    {"tips": "点击首页\"我\"按钮", "action": "click"},
+                    {"tips": "等待一会", "action": "wait", "time": 1.0},
+                    {"tips": "查找用户名控件", "action": "find", "id": "fb3", "pos": 0}
+                ],
+                "android_chat_rect_script": [
+                    {"tips": "获取发言对象区域", "action": "find", "xpath": "//android.widget.TextView[@text=\"说点什么...\"]", "back": "rect"}
+                ],
+                "android_chat_send_script": [
+                    {"tips": "获取发送按钮", "action": "find", "xpath": "//android.widget.Button[@content-desc=\"发送\"]", "back": "rect"}
+                ],
+                "android_heart_script": [
+                    {"tips": "获取小心心按钮区域", "action": "find", "xpath": "//android.widget.Button[@content-desc=\"小心心\"]", "back": "rect"}
+                ],
+                "android_car_script": [
+                    {"tips": "获取购物车按钮区域", "action": "find", "id": "h9l", "back": "rect"}
+                ]
+            }
+        },
+        {
+            "descript": "匹配 Letv X600 的版本, 直接指定位置操作",
+            "regular": {
+                "brand": "^Letv$",
+                "model": "^X600$"
+            },
+            "script": {
+                "android_chat_rect_script": [
+                    {"tips": "获取发言对象区域", "action": "output", "output": [60, 1800, 170, 80]}
+                ],
+                "android_chat_send_script": [
+                    {"tips": "获取发送按钮区域", "action": "output", "output": [1000, 1760, 50, 50]}
+                ],
+                "android_heart_script": [
+                    {"tips": "获取小心心按钮区域", "action": "output", "output": [740, 1800, 50, 80]}
+                ],
+                "android_car_script": [
+                    {"tips": "获取购物车按钮区域", "action": "output", "output": [620, 1800, 50, 80]}
+                ]
+            }
+        }
+    ]
+}

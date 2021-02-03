@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="page-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" class="bi" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <use xlink:href="./img/bootstrap-icons.svg#phone" />
+        </svg>
+        设备清单
+        </h4>
+        <div class="devices_table_toolbar">
+        <!-- 表格头工具栏 -->
+        <button type="button" class="btn btn-primary my-1" id="btn_in_line" data-toggle="tooltip"
+            data-trigger="hover" data-placement="top" title="选中的设备一键进入直播间"
+            onclick="$.douyin_api.into_app_line();">
+            进入直播
+        </button>
+        <button type="button" class="btn btn-primary my-1" id="btn_out_line" data-toggle="tooltip"
+            data-trigger="hover" data-placement="top" title="选中的设备一键退出直播间"
+            onclick="$.douyin_api.out_app_line();">
+            退出直播
+        </button>
+        <button type="button" class="btn btn-primary my-1" id="btn_restore_ime" data-toggle="tooltip"
+            data-trigger="hover" data-placement="top" title="设置选中设备的输入法"
+            onclick="$.douyin_api.restore_ime(false);">
+            设置输入法
+        </button>
+        <!-- 连接手机帮助 -->
+        <a class="text-secondary text-decoration-none" href="#" data-toggle="tooltip" data-placement="top"
+            tooltip="true" title="帮助: 如何连接手机" onclick="$.ui_tools.show_modal('connect_device_help');">
+            <i class="bi-question-diamond" style="font-size: 1.2rem;"></i>
+        </a>
+        <span>&nbsp;&nbsp;</span>
+        <p></p>
+        <svg width="16" height="16" viewBox="0 0 16 16" class="bi" fill="currentColor" style="color:red;"
+            xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <use xlink:href="./img/bootstrap-icons.svg#circle-fill" />
+        </svg>
+        <label>连接异常</label>
+        <span>&nbsp;&nbsp;</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" class="bi" fill="currentColor" style="color:skyblue;"
+            xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <use xlink:href="./img/bootstrap-icons.svg#circle-fill" />
+        </svg>
+        <label>已连接</label>
+        <span>&nbsp;&nbsp;</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" class="bi" fill="currentColor" style="color:greenyellow;"
+            xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <use xlink:href="./img/bootstrap-icons.svg#circle-fill" />
+        </svg>
+        <label>已进入直播</label>
+        </div>
+        <table id="devices_table"></table>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<!-- 在线用户选择 -->
+<div class="card border-primary customer-hv-bt">
+    <div class="card-body container overflow-auto">
+      <h6 class="card-title font-weight-bold">人数选择</h6>
+      <div class="row mb-2 d-flex justify-content-center">
+        <button type="button" class="btn btn-primary mr-2 ml-2 mb-1 col-sm-3 p-1" id=""
+          onclick="$.douyin_api.select_batch_user(1.0);">选全部</button>
+        <button type="button" class="btn btn-primary mr-2 ml-2 mb-1 col-sm-3 p-1" id=""
+          onclick="$.douyin_api.select_batch_user(0.5);">选一半</button>
+        <button type="button" class="btn btn-primary mr-2 ml-2 mb-1 col-sm-3 p-1" id=""
+          onclick="$.douyin_api.select_batch_user(0.333);">选1/3</button>
+      </div>
+        <h6 class="card-title mb-2 text-break font-weight-bold">选中用户: &nbsp;<a id="selected_user_text" class="font-weight-normal"></a></h6>
+    </div>
+  </div>

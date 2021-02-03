@@ -1,0 +1,58 @@
+<!-- 后台管理 -->
+<div class="row">
+    <div class="col-sm-9 mb-1">
+      <!-- 左边操作框 -->
+      <div class="row mb-1">
+        <div class="col-sm-4 mb-2">
+          <!-- 在线用户 -->
+          {% include 'plugin/douyin/control/card_online_user.html' %}
+        </div>
+        <div class="col-sm-8 pl-0 mb-2">
+          <!-- 聊天记录 -->
+          {% include 'plugin/douyin/control/card_chat_log.html' %}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-sm-4 mb-1">
+          <!-- 在线用户选择 -->
+          {% include 'plugin/douyin/control/card_user_select.html' %}
+        </div>
+        <div class="col-sm-8 pl-0 mb-1">
+          <!-- 在线用户的操作按钮 -->
+          {% include 'plugin/douyin/control/card_action.html' %}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 pl-0">
+      <!-- 后台参数设置 -->
+      {% include 'plugin/douyin/control/card_bg_config.html' %}
+    </div>
+</div>
+<!-- 样式表 -->
+<style type="text/css">
+    /* 65% 屏幕高度 */
+    .customer-hv-top {
+      height: 65vh;
+      min-height: 500px;
+    }
+
+    .customer-hv-bt {
+      height: 25vh;
+      min-height: 200px;
+    }
+
+    .customer-hv-full {
+      height: 91.5vh;
+      min-height: 500px;
+    }
+
+    /* 最小宽度限制 */
+    .customer-mw-sm {
+      min-width: 250px;
+    }
+
+    /* 字体14px */
+    .customer-f-sm {
+      font-size: 14px;
+    }
+</style>
